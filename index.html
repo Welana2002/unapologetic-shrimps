@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unapologetic Shrimps</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>🦐 Unapologetic Shrimps</h1>
-      <h2>En québécois : Crevettes sans regrets</h2>
-      <p>
-        🎯 Chaque "désolé" inutile = 1 point sur le compteur<br />
-        💸 1 point = 1€ à rembourser<br />
-        🦐 Chaque remboursement donne une crevette-trophée<br />
-        🎨 Plus tu dois, plus la crevette de l'autre fonce...
-      </p>
-    </header>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unapologetic Shrimps 🦐</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>Unapologetic Shrimps 🦐</h1>
+    <h2>En québécois : Crevettes sans Regrets</h2>
+    <p>Chaque excuse = +1€ à rembourser. Clique si tu t’es excusé·e !</p>
+  </header>
 
-    <main>
-      <div class="player" id="player1">
-        <h2>Personne 1</h2>
-        <p>Excuses reçues : <span id="score1">0</span></p>
-        <button onclick="increment('1')">+ 1</button>
-        <button onclick="rembourser('1')">Rembourser</button>
-        <div class="badges" id="badges1"></div>
-      </div>
+  <main>
+    <div class="player" id="player1">
+      <h2>Personne 1</h2>
+      <p class="title" id="title1">Pick me originelle</p>
+      <div class="counter" id="count1">0€</div>
+      <button onclick="increment('1')">Je me suis excusé·e</button>
+      <button onclick="refund('1')">Remboursé !</button>
+      <div class="badges" id="badges1"></div>
+    </div>
 
-      <div class="player" id="player2">
-        <h2>Personne 2</h2>
-        <p>Excuses reçues : <span id="score2">0</span></p>
-        <button onclick="increment('2')">+1</button>
-        <button onclick="rembourser('2')">Rembourser</button>
-        <div class="badges" id="badges2"></div>
-      </div>
-    </main>
+    <div class="player" id="player2">
+      <h2>Personne 2</h2>
+      <p class="title" id="title2">Petite Crevette</p>
+      <div class="counter" id="count2">0€</div>
+      <button onclick="increment('2')">Je me suis excusé·e</button>
+      <button onclick="refund('2')">Remboursé !</button>
+      <div class="badges" id="badges2"></div>
+    </div>
+  </main>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
