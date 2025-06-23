@@ -1,56 +1,44 @@
-let data = JSON.parse(localStorage.getItem("shrimpData")) || {
-  1: { count: 0, shrimp: 0 },
-  2: { count: 0, shrimp: 0 }
-};
+let scores = { 1: 0, 2: 0 };
+let crevettes = { 1: 0, 2: 0 };
 
-const titles = [
-  "Crevette timide",
-  "Crevette confuse",
-  "Crevette coupable",
-  "Crevette repentante",
-  "Crevette ruinée"
-];
-
-function save() {
-  localStorage.setItem("shrimpData", JSON.stringify(data));
+function updateDisplay() {
+  document.getElementById("score1").textContent = scores[1];
+  document.getElementById("score2").textContent = scores[2];
+  updateBadges("1");
+  updateBadges("2");
 }
 
-function updateUI() {
-  [1, 2].forEach(id => {
-    const count = data[id].count;
-    const otherCount = data[id === 1 ? 2 : 1].count;
-    const shrimps = data[id].shrimp;
-    document.getElementById("count" + id).textContent = count + "€";
-    document.getElementById("title" + id).textContent =
-      titles[Math.min(Math.floor(count / 3), titles.length - 1)];
-
-    const badges = document.getElementById("badges" + id);
-    badges.innerHTML = "";
-    for (let i = 0; i < shrimps; i++) {
-      const badge = document.createElement("span");
-      badge.className = "badge";
-      badge.classList.add(
-        i < otherCount / 2 ? "level-3" : i < otherCount ? "level-2" : "level-1"
-      );
-      badge.textContent = "🦐";
-      badges.appendChild(badge);
-    }
-  });
+function increment(player) {
+  const other = player === "1" ? "2" : "1";
+  scores[player]++;
+  updateDisplay();
 }
 
-function increment(id) {
-  data[id].count++;
-  save();
-  updateUI();
-}
-
-function refund(id) {
-  if (data[id].count > 0) {
-    data[id].count--;
-    data[id].shrimp++;
-    save();
-    updateUI();
+function rembourser(player) {
+  if (scores[player] > 0) {
+    scores[player]--;
+    crevettes[player]++;
+    updateDisplay();
   }
 }
 
-updateUI();
+function updateBadges(player) {
+  const container = document.getElementById("badges" + player);
+  container.innerHTML = "";
+
+  for (let i = 0; i < crevettes[player]; i++) {
+    const img = document.createElement("img");
+    img.src = "assets/shrimp.png";
+    img.style.filter = computeFilter(scores[player]);
+    container.appendChild(img);
+  }
+}
+
+function computeFilter(score) {
+  if (score === 0) return "brightness(100%)";
+  if (score < 3) return "brightness(90%)";
+  if (score < 6) return "brightness(75%) saturate(1.5)";
+  return "brightness(60%) saturate(2)";
+}
+
+updateDisplay();
